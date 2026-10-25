@@ -1488,7 +1488,7 @@ function setupShare(id,canon,textFn){const box=document.getElementById(id);if(!b
     else if(b.dataset.act==="more"){ev.preventDefault();try{await navigator.share({title:document.title,text:t,url})}catch(e){}}
     else msg.textContent=T("開いた画面で送信してください。","Send it from the screen that opens.");});}
 
-const APP_URL="https://www.caninevet.jp/";
+const APP_URL="https://www.caninevet.jp/%E3%82%AA%E3%83%BC%E3%83%8A%E3%83%BC%E3%82%BF%E3%82%A4%E3%83%97%E8%A8%BA%E6%96%AD/";
 setupShare("shareStart",APP_URL,()=>T("オーナータイプ診断。馬や犬と暮らすあなたは何色のオーナー？（約5分）","Owner Type Reading: what color of horse & dog owner are you? (about 5 min)"));
 setupShare("shareResult",APP_URL,()=>{try{const C=coreSet().map(k=>COLORS[k]);return T(`オーナータイプ診断をやってみた。私のコアは「${C.map(x=>x.name).join("×")}」でした。あなたは何色？`,`I tried the Owner Type Reading. My core is ${C.map(x=>x.name).join(" × ")}. What color are you?`)}catch(e){return T("オーナータイプ診断をやってみた。あなたは何色？","I tried the Owner Type Reading. What color are you?")}});
 function resultText(){if(LANG==="en")return resultTextEN();const fs=famScores(),cs=colorScores(),C=coreSet().map(k=>COLORS[k]),d=new Date(),L=[];
