@@ -2031,8 +2031,8 @@ ownerStatic();
 /* Jimdo の iframe に高さを伝える（親ページが受け取って高さを合わせる） */
 const IN_FRAME=(()=>{try{return window.self!==window.top}catch(e){return true}})();
 let _lastH=0;
-function postH(){if(!IN_FRAME)return;const h=Math.ceil(document.documentElement.scrollHeight);if(Math.abs(h-_lastH)<2)return;_lastH=h;try{parent.postMessage({cvOwnerType:1,h},"*")}catch(e){}}
-if(IN_FRAME){new ResizeObserver(()=>postH()).observe(document.body);window.addEventListener("load",postH);
+function postH(){if(!IN_FRAME)return;const w=document.querySelector(".wrap");const h=Math.ceil((w?w.getBoundingClientRect().bottom+window.scrollY:document.body.scrollHeight)+56);if(Math.abs(h-_lastH)<2)return;_lastH=h;try{parent.postMessage({cvOwnerType:1,h},"*")}catch(e){}}
+if(IN_FRAME){new ResizeObserver(()=>postH()).observe(document.querySelector(".wrap")||document.body);window.addEventListener("load",postH);
   const _show=show;show=function(v){const r=_show.apply(this,arguments);_lastH=0;postH();try{parent.postMessage({cvOwnerType:1,top:1},"*")}catch(e){}return r};}
 
 paintAll();
